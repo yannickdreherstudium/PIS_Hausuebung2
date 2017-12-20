@@ -13,4 +13,10 @@ public class TeilnehmerListe {
 		}
 	}
 	
+	public void endConnection(ClientConnection connection) {
+		synchronized (connections) {
+			connections.remove(connection);
+		}
+	}
+	
 }
