@@ -10,4 +10,10 @@ public class ClientConnection extends Connection{
 		super(socket);
 	}
 
+	@Override
+	public void onDisconnect() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

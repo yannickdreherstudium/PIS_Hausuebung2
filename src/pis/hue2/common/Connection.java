@@ -20,8 +20,8 @@ public abstract class Connection {
 				while(isConnected()){
 					String input = in.readLine();
 					if(input != null){
-						input = input.replace("ÿûÿû ÿûÿû'ÿýÿûÿý", "");
-						System.out.println(input);
+						input = input.replace("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "");
+						
 					}
 				}
 			}catch(Exception ex){
@@ -32,6 +32,8 @@ public abstract class Connection {
 
 	}
 
+	public abstract void onDisconnect();
+	
 	public boolean isConnected(){
 		return socket.isBound() && !socket.isClosed() && socket.isConnected();
 	}

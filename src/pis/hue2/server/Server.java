@@ -9,16 +9,18 @@ import pis.hue2.common.PacketType;
 
 public class Server {
 
+	public static Server instance;
+	
 	public static void main(String[] args) {
-		Server server = new Server();
+		instance = new Server();
 		try{
-			server.startServer();
+			instance.startServer();
 		}catch(IOException ex){
 			System.err.println("Error trying to bind port!");
 			ex.printStackTrace();
 		}
 		System.out.println("Server started!");
-		while(server.isRunning()){}
+		while(instance.isRunning()){}
 		System.out.println("Server closed!");
 	}
 
