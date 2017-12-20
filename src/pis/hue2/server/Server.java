@@ -29,9 +29,9 @@ public class Server {
 		socket = new ServerSocket(23);
 		System.out.println(socket.getInetAddress());
 		new Thread(() -> {
+			System.out.println("Waiting for connections");
 			while(isRunning()){
 				try{
-					System.out.println("Waiting for connection");
 					Socket client = socket.accept();
 					System.out.println("New client connected");
 					teilnehmer.newConnection(client);

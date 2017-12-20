@@ -8,7 +8,9 @@ public class TeilnehmerListe {
 	private HashSet<ClientConnection> connections = new HashSet<>();
 	
 	public void newConnection(Socket connection){
-		connections.add(new ClientConnection(connection));
+		synchronized (connections) {
+			connections.add(new ClientConnection(connection));
+		}
 	}
 	
 }
