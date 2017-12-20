@@ -3,11 +3,14 @@ package pis.hue2.server;
 import java.net.Socket;
 
 import pis.hue2.common.Connection;
+import pis.hue2.common.PacketManager;
 
 public class ClientConnection extends Connection{
 
-	public ClientConnection(Socket socket) {
-		super(socket);
+	private String name;
+	
+	public ClientConnection(Socket socket, PacketManager manager) {
+		super(socket, manager);
 	}
 
 	@Override
@@ -15,5 +18,14 @@ public class ClientConnection extends Connection{
 		// TODO Auto-generated method stub
 		
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 
 }

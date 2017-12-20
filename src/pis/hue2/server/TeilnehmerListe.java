@@ -9,7 +9,7 @@ public class TeilnehmerListe {
 	
 	public void newConnection(Socket connection){
 		synchronized (connections) {
-			connections.add(new ClientConnection(connection));
+			connections.add(new ClientConnection(connection, Server.instance.packetManager));
 		}
 	}
 	

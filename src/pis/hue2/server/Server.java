@@ -5,6 +5,9 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import pis.hue2.common.Connection;
+import pis.hue2.common.PacketHandler;
+import pis.hue2.common.PacketManager;
 import pis.hue2.common.PacketType;
 
 public class Server {
@@ -26,8 +29,10 @@ public class Server {
 
 	private ServerSocket socket;
 	public TeilnehmerListe teilnehmer = new TeilnehmerListe();
+	public PacketManager packetManager = new PacketManager();
 
 	public void startServer() throws IOException{
+		registerHandler();
 		socket = new ServerSocket(23);
 		System.out.println(socket.getInetAddress());
 		new Thread(() -> {
@@ -44,6 +49,24 @@ public class Server {
 		}).start();
 	}
 
+	private void registerHandler(){
+		packetManager.registerPacketHandler(PacketType.connect, new PacketHandler() {
+			
+			@Override
+			public boolean handlePacket(Connection con, String packet) {
+				ClientConnection ccon = (ClientConnection) con;
+				if(packet.isEmpty() || packet.contains(":") || packet.length() > 30){
+					ccon.sendPacket(PacketType.refused, "invalid_name");
+					return false;
+				}
+				ccon.setName(packet);
+				ccon.sendPacket(PacketType.connect, "ok");
+				System.out.println("Client renamed to '" + packet +"'");
+				return true;
+			}
+		});
+	}
+	
 	public boolean isRunning(){
 		return socket.isBound() && !socket.isClosed();
 	}
