@@ -37,7 +37,11 @@ public abstract class Connection {
 							socket.close();
 							break;
 						}
-						if(!handler.handlePacket(this, type, input.substring(input.indexOf(":")+1, input.length()))){
+						if(getConnectionState() == ConnectionState.Login && !(type == PacketType.connect || type == PacketType.disconnect)){
+							socket.close();
+							break;
+						}
+						if(!handler.handlePacket(this, type, input.substring(input.indexOf(":")+1, input.length()-2))){
 							socket.close();
 							break;
 						}
@@ -53,6 +57,8 @@ public abstract class Connection {
 	}
 
 	public abstract void onDisconnect();
+
+	public abstract ConnectionState getConnectionState();
 
 	public boolean isConnected(){
 		return socket.isBound() && !socket.isClosed() && socket.isConnected();

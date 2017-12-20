@@ -1,7 +1,6 @@
 package pis.hue2.server;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -34,7 +33,6 @@ public class Server {
 	public void startServer() throws IOException{
 		registerHandler();
 		socket = new ServerSocket(23);
-		System.out.println(socket.getInetAddress());
 		new Thread(() -> {
 			System.out.println("Waiting for connections");
 			while(isRunning()){
@@ -62,6 +60,14 @@ public class Server {
 				ccon.setName(packet);
 				ccon.sendPacket(PacketType.connect, "ok");
 				System.out.println("Client renamed to '" + packet +"'");
+				return true;
+			}
+		});
+		packetManager.registerPacketHandler(PacketType.message, new PacketHandler() {
+			
+			@Override
+			public boolean handlePacket(Connection con, String packet) {
+				teilnehmer.broadcast(PacketType.message, ((ClientConnection)con).getName() + ":" + packet);
 				return true;
 			}
 		});
