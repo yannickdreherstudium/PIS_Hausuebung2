@@ -5,6 +5,7 @@ import java.net.Socket;
 import pis.hue2.common.Connection;
 import pis.hue2.common.ConnectionState;
 import pis.hue2.common.PacketManager;
+import pis.hue2.common.PacketType;
 
 public class ClientConnection extends Connection{
 	
@@ -26,9 +27,14 @@ public class ClientConnection extends Connection{
 		return name;
 	}
 
-	public void setName(String name) {
+	public boolean setName(String name) {
+		if(Server.instance.teilnehmer.isNameinUse(name)){
+			sendPacket(PacketType.refused, "name_in_use");
+			return false;
+		}
 		this.name = name;
 		state = ConnectionState.Connected;
+		return true;
 	}
 
 	@Override

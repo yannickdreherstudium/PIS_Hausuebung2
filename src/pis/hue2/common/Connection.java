@@ -41,7 +41,7 @@ public abstract class Connection {
 							socket.close();
 							break;
 						}
-						if(!handler.handlePacket(this, type, input.substring(input.indexOf(":")+1, input.length()-2))){
+						if(!handler.handlePacket(this, type, input.substring(input.indexOf(":")+1, input.length()))){
 							socket.close();
 							break;
 						}

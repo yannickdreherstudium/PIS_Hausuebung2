@@ -32,7 +32,7 @@ public class Server {
 
 	public void startServer() throws IOException{
 		registerHandler();
-		socket = new ServerSocket(23);
+		socket = new ServerSocket(25565);
 		new Thread(() -> {
 			System.out.println("Waiting for connections");
 			while(isRunning()){
@@ -57,8 +57,12 @@ public class Server {
 					ccon.sendPacket(PacketType.refused, "invalid_name");
 					return false;
 				}
-				ccon.setName(packet);
+				boolean answer = ccon.setName(packet);
+				if(!answer){
+					return false;
+				}
 				ccon.sendPacket(PacketType.connect, "ok");
+				teilnehmer.broadcastUserList();
 				System.out.println("Client renamed to '" + packet +"'");
 				return true;
 			}
@@ -69,6 +73,14 @@ public class Server {
 			public boolean handlePacket(Connection con, String packet) {
 				teilnehmer.broadcast(PacketType.message, ((ClientConnection)con).getName() + ":" + packet);
 				return true;
+			}
+		});
+		packetManager.registerPacketHandler(PacketType.disconnect, new PacketHandler() {
+			
+			@Override
+			public boolean handlePacket(Connection con, String packet) {
+				con.sendPacket(PacketType.disconnect, "ok");
+				return false;
 			}
 		});
 	}
