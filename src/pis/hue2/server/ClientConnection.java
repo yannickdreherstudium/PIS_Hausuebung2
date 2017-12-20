@@ -12,7 +12,7 @@ public class ClientConnection extends Connection{
 
 	@Override
 	public void onDisconnect() {
-		// TODO Auto-generated method stub
+		Server.instance.teilnehmer.endConnection(this);
 		
 	}
 
