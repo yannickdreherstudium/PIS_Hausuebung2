@@ -66,7 +66,7 @@ public abstract class Connection {
 
 	public void sendPacket(PacketType type, String content){
 		try {
-			socket.getOutputStream().write((type.name() + ":" + content).getBytes());
+			socket.getOutputStream().write((type.name() + ":" + content+ "\n").getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
