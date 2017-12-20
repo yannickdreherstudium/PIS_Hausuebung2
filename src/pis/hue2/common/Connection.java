@@ -1,7 +1,6 @@
 package pis.hue2.common;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
@@ -9,11 +8,9 @@ public abstract class Connection {
 
 	private Socket socket;
 	private Thread clientThread;
-	private PacketManager handler;
 
 	public Connection(Socket socket, PacketManager handler){
 		this.socket = socket;
-		this.handler = handler;
 		clientThread = new Thread(() -> {
 			try{
 				BufferedReader in = new BufferedReader(
@@ -67,8 +64,8 @@ public abstract class Connection {
 	public void sendPacket(PacketType type, String content){
 		try {
 			socket.getOutputStream().write((type.name() + ":" + content+ "\n").getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			
 		}
 	}
 
