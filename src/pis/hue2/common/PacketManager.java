@@ -2,6 +2,12 @@ package pis.hue2.common;
 
 import java.util.HashMap;
 
+/**
+ * Regelt die einzelnen Packet's #äü
+ * 
+ * @author Johannes Mahn, Yannick Dreher
+ *
+ */
 public class PacketManager {
 
 	private HashMap<PacketType, PacketHandler> handler = new HashMap<>();
