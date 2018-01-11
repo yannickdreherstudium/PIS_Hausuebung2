@@ -9,13 +9,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import pis.hue2.common.PacketType;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 
 public class Gui {
 

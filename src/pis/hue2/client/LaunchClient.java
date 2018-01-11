@@ -23,7 +23,7 @@ public class LaunchClient {
 
 	private void initPacketHandler(){
 		packetManager.registerPacketHandler(PacketType.connect, new PacketHandler() {
-			
+
 			@Override
 			public boolean handlePacket(Connection con, String packet) {
 				guiAusgabe.zeigeNachricht("Connected!");
@@ -32,7 +32,7 @@ public class LaunchClient {
 			}
 		});
 		packetManager.registerPacketHandler(PacketType.message, new PacketHandler() {
-			
+
 			@Override
 			public boolean handlePacket(Connection con, String packet) {
 				guiAusgabe.zeigeNachricht(packet);
@@ -40,7 +40,7 @@ public class LaunchClient {
 			}
 		});
 		packetManager.registerPacketHandler(PacketType.namelist, new PacketHandler() {
-			
+
 			@Override
 			public boolean handlePacket(Connection con, String packet) {
 				guiAusgabe.zeigeListe(packet.split(":"));
@@ -48,7 +48,7 @@ public class LaunchClient {
 			}
 		});
 		packetManager.registerPacketHandler(PacketType.refused, new PacketHandler() {
-			
+
 			@Override
 			public boolean handlePacket(Connection con, String packet) {
 				guiAusgabe.zeigeNachricht("Kicked: " + packet);
@@ -56,7 +56,7 @@ public class LaunchClient {
 			}
 		});
 		packetManager.registerPacketHandler(PacketType.disconnect, new PacketHandler() {
-			
+
 			@Override
 			public boolean handlePacket(Connection con, String packet) {
 				guiAusgabe.zeigeNachricht("Disconnect: " + packet);
@@ -64,7 +64,7 @@ public class LaunchClient {
 			}
 		});
 	}
-	
+
 	public void sendPacktet(PacketType type, String message){
 		if(isConnected())
 			connection.sendPacket(type, message);
@@ -82,18 +82,26 @@ public class LaunchClient {
 		return guiAusgabe;
 	}
 
+	private boolean connecting = false;
+
 	public void connect(String ip, int port, String username){
-		if(isConnected()){
-			guiAusgabe.zeigeNachricht("Already connected!");
-			return;
-		}
-		try{
-			connection = new ServerConnection(new Socket(ip, port), packetManager);
-			connection.sendPacket(PacketType.connect, username);
-		}catch(Exception ex){
-			guiAusgabe.zeigeNachricht("Error connecting to server!");
-			return;
-		}
+		if(connecting)return;
+		connecting = true;
+		Thread t = new Thread(() -> {
+			if(isConnected()){
+				guiAusgabe.zeigeNachricht("Already connected!");
+				connecting = false;
+				return;
+			}
+			try{
+				connection = new ServerConnection(new Socket(ip, port), packetManager);
+				connection.sendPacket(PacketType.connect, username);
+			}catch(Exception ex){
+				guiAusgabe.zeigeNachricht("Error connecting to server!");
+			}
+			connecting = false;
+		});
+		t.start();
 	}
 
 	/**
