@@ -55,6 +55,14 @@ public class LaunchClient {
 				return false;
 			}
 		});
+		packetManager.registerPacketHandler(PacketType.disconnect, new PacketHandler() {
+			
+			@Override
+			public boolean handlePacket(Connection con, String packet) {
+				guiAusgabe.zeigeNachricht("Disconnect: " + packet);
+				return false;
+			}
+		});
 	}
 	
 	public void sendPacktet(PacketType type, String message){
@@ -83,7 +91,6 @@ public class LaunchClient {
 			connection = new ServerConnection(new Socket(ip, port), packetManager);
 			connection.sendPacket(PacketType.connect, username);
 		}catch(Exception ex){
-			ex.printStackTrace();
 			guiAusgabe.zeigeNachricht("Error connecting to server!");
 			return;
 		}

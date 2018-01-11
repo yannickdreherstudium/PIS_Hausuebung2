@@ -18,6 +18,7 @@ public class ServerConnection extends Connection {
 	public void onDisconnect() {
 		state = ConnectionState.Disconnected;
 		LaunchClient.getInstance().getGuiAusgabe().zeigeNachricht("Disconnected!");
+		LaunchClient.getInstance().getGuiAusgabe().zeigeListe(new String[0]);
 	}
 
 	@Override

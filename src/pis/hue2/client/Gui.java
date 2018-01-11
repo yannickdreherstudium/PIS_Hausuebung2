@@ -118,6 +118,7 @@ public class Gui {
 		JButton btnDisconnect = new JButton("Disconnect");
 		btnDisconnect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LaunchClient.getInstance().sendPacktet(PacketType.disconnect, "");
 			}
 		});
 		btnDisconnect.setBounds(470, 47, 131, 31);
