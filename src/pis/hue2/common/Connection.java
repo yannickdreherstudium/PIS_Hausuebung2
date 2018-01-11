@@ -1,6 +1,7 @@
 package pis.hue2.common;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
@@ -41,7 +42,7 @@ public abstract class Connection {
 							break;
 						}
 						if (getConnectionState() == ConnectionState.Login
-								&& !(type == PacketType.connect || type == PacketType.disconnect)) {
+								&& !(type == PacketType.connect || type == PacketType.disconnect || type == PacketType.refused)) {
 							socket.close();
 							break;
 						}
@@ -60,7 +61,7 @@ public abstract class Connection {
 		clientThread.start();
 
 	}
-
+	
 	public abstract void onDisconnect();
 
 	public abstract ConnectionState getConnectionState();
