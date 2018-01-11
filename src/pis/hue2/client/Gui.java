@@ -12,14 +12,16 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Gui {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField tF_msg;
+	private JTextField tF_serverip;
+	private JTextField tF_port;
+	private JTextField tF_username;
 
 	/**
 	 * Create the application.
@@ -39,34 +41,38 @@ public class Gui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(0, 546, 601, 43);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		tF_msg = new JTextField();
+		tF_msg.setBounds(0, 546, 601, 43);
+		frame.getContentPane().add(tF_msg);
+		tF_msg.setColumns(10);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBackground(SystemColor.controlHighlight);
 		textArea.setBounds(0, 96, 562, 434);
 		frame.getContentPane().add(textArea);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(90, 0, 336, 29);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		tF_serverip = new JTextField();
+		tF_serverip.setBounds(90, 0, 336, 29);
+		frame.getContentPane().add(tF_serverip);
+		tF_serverip.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Senden");
-		btnNewButton.setBounds(618, 558, 131, 31);
-		frame.getContentPane().add(btnNewButton);
+		JButton btnSend = new JButton("Senden");
+		btnSend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnSend.setBounds(618, 558, 131, 31);
+		frame.getContentPane().add(btnSend);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(583, 0, 166, 29);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		tF_port = new JTextField();
+		tF_port.setBounds(583, 0, 166, 29);
+		frame.getContentPane().add(tF_port);
+		tF_port.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(100, 48, 182, 29);
-		frame.getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		tF_username = new JTextField();
+		tF_username.setBounds(100, 48, 182, 29);
+		frame.getContentPane().add(tF_username);
+		tF_username.setColumns(10);
 		
 		JTextPane txtpnServerip = new JTextPane();
 		txtpnServerip.setText("ServerIP:");
@@ -84,16 +90,24 @@ public class Gui {
 		frame.getContentPane().add(txtpnUsername);
 		
 		JButton btnConnect = new JButton("Connect");
+		btnConnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnConnect.setBounds(331, 47, 131, 31);
 		frame.getContentPane().add(btnConnect);
 		
 		JButton btnDisconnect = new JButton("Disconnect");
+		btnDisconnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnDisconnect.setBounds(470, 47, 131, 31);
 		frame.getContentPane().add(btnDisconnect);
 		
 		JList list = new JList();
 		list.setBackground(SystemColor.controlHighlight);
-		list.setBounds(561, 123, 188, 404);
+		list.setBounds(561, 123, 188, 407);
 		frame.getContentPane().add(list);
 		
 		JTextPane txtpnAngemeldeteNutzer = new JTextPane();
