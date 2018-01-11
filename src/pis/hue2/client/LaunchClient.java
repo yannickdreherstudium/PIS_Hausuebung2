@@ -1,5 +1,6 @@
 package pis.hue2.client;
 
+import java.awt.EventQueue;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -10,23 +11,34 @@ import pis.hue2.common.PacketType;
 
 public class LaunchClient {
 
-	private ClientGUI clientgui;
-	private Socket socket;
-	private String server;
-	private String name;
-	private int port;
-	private ObjectInputStream input;
-	private ObjectOutputStream output;
+	private static LaunchClient instance;
+	private Gui window;
+	private ServerConnection connection = null;
+	private Ausgabe guiAusgabe;
 	
-	LaunchClient(String server, int port, String name, ClientGUI clientgui){
-		this.server = server;
-		this.port = port;
-		this.name = name;
-		this.clientgui = clientgui;
+	public LaunchClient(){
+		window = new Gui();
+		guiAusgabe = new Ausgabe(window);
 	}
 	
-	
-	
+	public boolean isConnected(){
+		return connection != null && connection.isConnected();
+	}
+
+	public static LaunchClient getInstance() {
+		return instance;
+	}
+
+	public Ausgabe getGuiAusgabe() {
+		return guiAusgabe;
+	}
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		instance = new LaunchClient();
+	}
 
 
 }
