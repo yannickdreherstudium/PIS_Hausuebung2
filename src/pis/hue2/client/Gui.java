@@ -147,6 +147,6 @@ public class Gui {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 96, 555, 434);
-		frmClient.getContentPane().add(scrollPane);
+		frmClient.getContentPane().add(scrollPane); 
 	}
 }
