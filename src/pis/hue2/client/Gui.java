@@ -15,6 +15,7 @@ import javax.swing.JTextPane;
 
 import pis.hue2.common.PacketType;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class Gui {
 
@@ -23,6 +24,7 @@ public class Gui {
 	private JTextField tF_serverip;
 	private JTextField tF_port;
 	private JTextField tF_username;
+	private JScrollPane test;
 	
 	private JList<String> list;
 	private JTextArea txtrWillkommen;
@@ -40,7 +42,6 @@ public class Gui {
 	 */
 	public Gui() {
 		initialize();
-		frmClient.setVisible(true);
 	}
 
 	/**
@@ -59,15 +60,6 @@ public class Gui {
 		tF_msg.setBounds(0, 546, 601, 43);
 		frmClient.getContentPane().add(tF_msg);
 		tF_msg.setColumns(10);
-		
-		txtrWillkommen = new JTextArea();
-		txtrWillkommen.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
-		txtrWillkommen.setLineWrap(true);
-		txtrWillkommen.setText("Willkommen\r\n");
-		txtrWillkommen.setEditable(false);
-		txtrWillkommen.setBackground(SystemColor.controlHighlight);
-		txtrWillkommen.setBounds(0, 96, 528, 434);
-		frmClient.getContentPane().add(txtrWillkommen);
 		
 		tF_serverip = new JTextField();
 		tF_serverip.setText("localhost");
@@ -144,8 +136,17 @@ public class Gui {
 		txtpnAngemeldeteNutzer.setBounds(561, 96, 188, 29);
 		frmClient.getContentPane().add(txtpnAngemeldeteNutzer);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(528, 96, 30, 434);
-		frmClient.getContentPane().add(scrollBar);
+		txtrWillkommen = new JTextArea();
+		txtrWillkommen.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
+		txtrWillkommen.setLineWrap(true);
+		txtrWillkommen.setText("Willkommen\r\n");
+		txtrWillkommen.setEditable(false);
+		txtrWillkommen.setBackground(SystemColor.controlHighlight);
+		txtrWillkommen.setBounds(0, 96, 555, 434);
+		frmClient.getContentPane().add(txtrWillkommen);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 96, 555, 434);
+		frmClient.getContentPane().add(scrollPane);
 	}
 }
