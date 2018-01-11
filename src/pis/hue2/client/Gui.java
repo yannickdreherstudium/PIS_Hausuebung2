@@ -1,6 +1,7 @@
 package pis.hue2.client;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,8 +12,8 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.JRadioButton;
-import java.awt.Font;
+
+import pis.hue2.common.PacketType;
 
 public class Gui {
 
@@ -76,6 +77,8 @@ public class Gui {
 		JButton btnSend = new JButton("Senden");
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				LaunchClient.getInstance().sendPacktet(PacketType.message, tF_msg.getText());
+				tF_msg.setText("");
 			}
 		});
 		btnSend.setBounds(618, 558, 131, 31);

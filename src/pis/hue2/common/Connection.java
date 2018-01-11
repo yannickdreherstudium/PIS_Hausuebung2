@@ -15,7 +15,13 @@ public abstract class Connection {
 			try {
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				while (isConnected()) {
-					String input = in.readLine();
+					String input = null;
+					try{
+						input = in.readLine();
+					}catch(Exception ex){
+						socket.close();
+						break;
+					}
 					if (input != null) {
 						input = input.replace("���� ����'������", "");
 						if (!input.contains(":")) {

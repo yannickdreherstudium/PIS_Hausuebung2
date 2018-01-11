@@ -27,6 +27,7 @@ public class LaunchClient {
 			@Override
 			public boolean handlePacket(Connection con, String packet) {
 				guiAusgabe.zeigeNachricht("Connected!");
+				connection.setConnected();
 				return true;
 			}
 		});
@@ -54,6 +55,11 @@ public class LaunchClient {
 				return false;
 			}
 		});
+	}
+	
+	public void sendPacktet(PacketType type, String message){
+		if(isConnected())
+			connection.sendPacket(type, message);
 	}
 
 	public boolean isConnected(){

@@ -24,5 +24,9 @@ public class ServerConnection extends Connection {
 	public ConnectionState getConnectionState() {
 		return state;
 	}
+	
+	public void setConnected(){
+		state = ConnectionState.Connected;
+	}
 
 }
