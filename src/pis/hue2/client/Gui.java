@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import pis.hue2.common.PacketType;
+import javax.swing.JScrollBar;
 
 public class Gui {
 
@@ -65,7 +66,7 @@ public class Gui {
 		txtrWillkommen.setText("Willkommen\r\n");
 		txtrWillkommen.setEditable(false);
 		txtrWillkommen.setBackground(SystemColor.controlHighlight);
-		txtrWillkommen.setBounds(0, 96, 562, 434);
+		txtrWillkommen.setBounds(0, 96, 528, 434);
 		frmClient.getContentPane().add(txtrWillkommen);
 		
 		tF_serverip = new JTextField();
@@ -142,5 +143,9 @@ public class Gui {
 		txtpnAngemeldeteNutzer.setText("Angemeldete Nutzer");
 		txtpnAngemeldeteNutzer.setBounds(561, 96, 188, 29);
 		frmClient.getContentPane().add(txtpnAngemeldeteNutzer);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(528, 96, 30, 434);
+		frmClient.getContentPane().add(scrollBar);
 	}
 }
