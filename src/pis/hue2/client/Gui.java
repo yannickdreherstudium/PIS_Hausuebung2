@@ -135,6 +135,7 @@ public class Gui {
 		frmClient.getContentPane().add(list);
 		
 		JTextPane txtpnAngemeldeteNutzer = new JTextPane();
+		txtpnAngemeldeteNutzer.setEditable(false);
 		txtpnAngemeldeteNutzer.setText("Angemeldete Nutzer");
 		txtpnAngemeldeteNutzer.setBounds(561, 96, 188, 29);
 		frmClient.getContentPane().add(txtpnAngemeldeteNutzer);
