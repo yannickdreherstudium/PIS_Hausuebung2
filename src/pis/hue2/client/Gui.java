@@ -11,6 +11,8 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.JRadioButton;
+import java.awt.Font;
 
 public class Gui {
 
@@ -21,14 +23,14 @@ public class Gui {
 	private JTextField tF_username;
 	
 	private JList<String> list;
-	private JTextArea textArea;
+	private JTextArea txtrWillkommen;
 
 	public JList<String> getList() {
 		return list;
 	}
 
 	public JTextArea getTextArea() {
-		return textArea;
+		return txtrWillkommen;
 	}
 
 	/**
@@ -56,13 +58,17 @@ public class Gui {
 		frmClient.getContentPane().add(tF_msg);
 		tF_msg.setColumns(10);
 		
-		textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setBackground(SystemColor.controlHighlight);
-		textArea.setBounds(0, 96, 562, 434);
-		frmClient.getContentPane().add(textArea);
+		txtrWillkommen = new JTextArea();
+		txtrWillkommen.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
+		txtrWillkommen.setLineWrap(true);
+		txtrWillkommen.setText("Willkommen\r\n");
+		txtrWillkommen.setEditable(false);
+		txtrWillkommen.setBackground(SystemColor.controlHighlight);
+		txtrWillkommen.setBounds(0, 96, 562, 434);
+		frmClient.getContentPane().add(txtrWillkommen);
 		
 		tF_serverip = new JTextField();
+		tF_serverip.setText("localhost");
 		tF_serverip.setBounds(90, 0, 336, 29);
 		frmClient.getContentPane().add(tF_serverip);
 		tF_serverip.setColumns(10);
@@ -76,6 +82,7 @@ public class Gui {
 		frmClient.getContentPane().add(btnSend);
 		
 		tF_port = new JTextField();
+		tF_port.setText("25565");
 		tF_port.setBounds(583, 0, 166, 29);
 		frmClient.getContentPane().add(tF_port);
 		tF_port.setColumns(10);
@@ -86,16 +93,19 @@ public class Gui {
 		tF_username.setColumns(10);
 		
 		JTextPane txtpnServerip = new JTextPane();
+		txtpnServerip.setEditable(false);
 		txtpnServerip.setText("ServerIP:");
 		txtpnServerip.setBounds(0, 0, 84, 29);
 		frmClient.getContentPane().add(txtpnServerip);
 		
 		JTextPane txtpnServerport = new JTextPane();
+		txtpnServerport.setEditable(false);
 		txtpnServerport.setText("ServerPORT:");
 		txtpnServerport.setBounds(445, 0, 113, 29);
 		frmClient.getContentPane().add(txtpnServerport);
 		
 		JTextPane txtpnUsername = new JTextPane();
+		txtpnUsername.setEditable(false);
 		txtpnUsername.setText("Username:");
 		txtpnUsername.setBounds(0, 48, 97, 29);
 		frmClient.getContentPane().add(txtpnUsername);
@@ -118,6 +128,8 @@ public class Gui {
 		frmClient.getContentPane().add(btnDisconnect);
 		
 		list = new JList<String>();
+		list.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		list.setValueIsAdjusting(true);
 		list.setBackground(SystemColor.controlHighlight);
 		list.setBounds(561, 123, 188, 407);
 		frmClient.getContentPane().add(list);
