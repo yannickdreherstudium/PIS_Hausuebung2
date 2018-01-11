@@ -9,42 +9,44 @@ public abstract class Connection {
 	private Socket socket;
 	private Thread clientThread;
 
-	public Connection(Socket socket, PacketManager handler){
+	public Connection(Socket socket, PacketManager handler) {
 		this.socket = socket;
 		clientThread = new Thread(() -> {
-			try{
-				BufferedReader in = new BufferedReader(
-						new InputStreamReader(socket.getInputStream()));
-				while(isConnected()){
+			try {
+				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				while (isConnected()) {
 					String input = in.readLine();
-					if(input != null){
+					if (input != null) {
 						input = input.replace("���� ����'������", "");
-						if(!input.contains(":")){
+						if (!input.contains(":")) {
 							sendPacket(PacketType.disconnect, "invalid_command");
 							socket.close();
 							break;
 						}
 						String command = input.substring(0, input.indexOf(":"));
 						PacketType type = null;
-						try{
+						try {
 							type = PacketType.valueOf(command);
-						}catch(Exception ex){}
-						if(type == null){
+						} catch (Exception ex) {
+						}
+						if (type == null) {
 							sendPacket(PacketType.disconnect, "invalid_command");
 							socket.close();
 							break;
 						}
-						if(getConnectionState() == ConnectionState.Login && !(type == PacketType.connect || type == PacketType.disconnect)){
+						if (getConnectionState() == ConnectionState.Login
+								&& !(type == PacketType.connect || type == PacketType.disconnect)) {
 							socket.close();
 							break;
 						}
-						if(!handler.handlePacket(this, type, input.substring(input.indexOf(":")+1, input.length()))){
+						if (!handler.handlePacket(this, type,
+								input.substring(input.indexOf(":") + 1, input.length()))) {
 							socket.close();
 							break;
 						}
 					}
 				}
-			}catch(Exception ex){
+			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 			onDisconnect();
@@ -57,17 +59,16 @@ public abstract class Connection {
 
 	public abstract ConnectionState getConnectionState();
 
-	public boolean isConnected(){
+	public boolean isConnected() {
 		return socket.isBound() && !socket.isClosed() && socket.isConnected();
 	}
 
-	public void sendPacket(PacketType type, String content){
+	public void sendPacket(PacketType type, String content) {
 		try {
-			socket.getOutputStream().write((type.name() + ":" + content+ "\n").getBytes());
+			socket.getOutputStream().write((type.name() + ":" + content + "\n").getBytes());
 		} catch (Exception e) {
-			
+
 		}
 	}
-
 
 }

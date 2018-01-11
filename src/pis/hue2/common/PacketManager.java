@@ -3,7 +3,7 @@ package pis.hue2.common;
 import java.util.HashMap;
 
 /**
- * Regelt die einzelnen Packet's #äü
+ * Regelt die einzelnen Packet's 
  * 
  * @author Johannes Mahn, Yannick Dreher
  *
