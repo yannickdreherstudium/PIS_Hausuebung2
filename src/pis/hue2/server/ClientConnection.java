@@ -32,7 +32,7 @@ public class ClientConnection extends Connection {
 	 */
 	@Override
 	public void onDisconnect() {
-		Server.instance.teilnehmer.endConnection(this);
+		LaunchServer.instance.teilnehmer.endConnection(this);
 		state = ConnectionState.Disconnected;
 		System.out.println("Client '" + name + "' left!");
 	}
@@ -53,7 +53,7 @@ public class ClientConnection extends Connection {
 	 * @return Boolean - true wenn der Name erfolgreich gesetzt werden konnte
 	 */
 	public boolean setName(String name) {
-		if (Server.instance.teilnehmer.isNameinUse(name)) {
+		if (LaunchServer.instance.teilnehmer.isNameinUse(name)) {
 			sendPacket(PacketType.refused, "name_in_use");
 			return false;
 		}

@@ -71,11 +71,11 @@ public class TeilnehmerListe {
 	public void newConnection(Socket connection) {
 		synchronized (connections) {
 			if (connections.size() >= 3) {
-				ClientConnection con = new ClientConnection(connection, Server.instance.packetManager);
+				ClientConnection con = new ClientConnection(connection, LaunchServer.instance.packetManager);
 				con.sendPacket(PacketType.refused, "too_many_users");
 				return;
 			}
-			connections.add(new ClientConnection(connection, Server.instance.packetManager));
+			connections.add(new ClientConnection(connection, LaunchServer.instance.packetManager));
 		}
 	}
 

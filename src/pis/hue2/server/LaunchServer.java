@@ -15,9 +15,9 @@ import pis.hue2.common.PacketType;
  * @author Johannes Mahn, Yannick Dreher
  *
  */
-public class Server {
+public class LaunchServer {
 
-	public static Server instance;
+	public static LaunchServer instance;
 
 	/**
 	 * Erzeugt einen neuen Server
@@ -25,7 +25,7 @@ public class Server {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		instance = new Server();
+		instance = new LaunchServer();
 		try {
 			instance.startServer();
 		} catch (IOException ex) {
