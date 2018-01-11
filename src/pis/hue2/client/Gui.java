@@ -1,19 +1,16 @@
 package pis.hue2.client;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import java.awt.Color;
 import java.awt.SystemColor;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class Gui {
 
@@ -22,6 +19,17 @@ public class Gui {
 	private JTextField tF_serverip;
 	private JTextField tF_port;
 	private JTextField tF_username;
+	
+	private JList<String> list;
+	private JTextArea textArea;
+
+	public JList<String> getList() {
+		return list;
+	}
+
+	public JTextArea getTextArea() {
+		return textArea;
+	}
 
 	/**
 	 * Create the application.
@@ -48,7 +56,7 @@ public class Gui {
 		frmClient.getContentPane().add(tF_msg);
 		tF_msg.setColumns(10);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setBackground(SystemColor.controlHighlight);
 		textArea.setBounds(0, 96, 562, 434);
@@ -95,6 +103,7 @@ public class Gui {
 		JButton btnConnect = new JButton("Connect");
 		btnConnect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LaunchClient.getInstance().connect(tF_serverip.getText(), Integer.parseInt(tF_port.getText()), tF_username.getText());
 			}
 		});
 		btnConnect.setBounds(331, 47, 131, 31);
@@ -108,7 +117,7 @@ public class Gui {
 		btnDisconnect.setBounds(470, 47, 131, 31);
 		frmClient.getContentPane().add(btnDisconnect);
 		
-		JList list = new JList();
+		list = new JList<String>();
 		list.setBackground(SystemColor.controlHighlight);
 		list.setBounds(561, 123, 188, 407);
 		frmClient.getContentPane().add(list);

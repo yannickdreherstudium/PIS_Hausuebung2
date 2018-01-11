@@ -8,7 +8,6 @@ import pis.hue2.common.PacketManager;
 
 public class ServerConnection extends Connection {
 	
-	private String name = null;
 	private ConnectionState state = ConnectionState.Login;
 
 	public ServerConnection(Socket socket, PacketManager handler) {
@@ -17,13 +16,12 @@ public class ServerConnection extends Connection {
 
 	@Override
 	public void onDisconnect() {
-		// TODO Auto-generated method stub
-		
+		state = ConnectionState.Disconnected;
+		LaunchClient.getInstance().getGuiAusgabe().zeigeNachricht("Disconnected!");
 	}
 
 	@Override
 	public ConnectionState getConnectionState() {
-		// TODO Auto-generated method stub
 		return state;
 	}
 
