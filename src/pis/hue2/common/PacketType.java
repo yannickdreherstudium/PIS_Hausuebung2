@@ -1,7 +1,7 @@
 package pis.hue2.common;
 
 /**
- * Der Verschienden PacketTypen
+ * Stellt die Verschienden PacketTypen zur Verfügung
  * 
  * @author Johannes Mahn, Yannick Dreher
  */

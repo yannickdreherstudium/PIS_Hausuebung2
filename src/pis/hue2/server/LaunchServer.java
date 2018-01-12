@@ -64,6 +64,9 @@ public class LaunchServer {
 		}).start();
 	}
 
+	/**
+	 * Bearbeitet die einkommenden Nachrichten nach Typ
+	 */
 	private void registerHandler() {
 		packetManager.registerPacketHandler(PacketType.connect, new PacketHandler() {
 

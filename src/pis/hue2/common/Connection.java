@@ -4,11 +4,23 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+/**
+ * Stellt Socket und Thread für dei Connection zur Verfügung
+ * 
+ * @author Johannes Mahn, Yannick Dreher
+ *
+ */
 public abstract class Connection {
 
 	private Socket socket;
 	private Thread clientThread;
 
+	/**
+	 * Liest per BufferdReader den Nachrichtenverkehr zwischen Server und Client
+	 * 
+	 * @param socket
+	 * @param handler
+	 */
 	public Connection(Socket socket, PacketManager handler) {
 		this.socket = socket;
 		clientThread = new Thread(() -> {
@@ -16,13 +28,14 @@ public abstract class Connection {
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				while (isConnected()) {
 					String input = null;
-					try{
+					try {
 						input = in.readLine();
-					}catch(Exception ex){
+					} catch (Exception ex) {
 						socket.close();
 						break;
 					}
 					if (input != null) {
+						// Dies ist wegen der Verbidungseigenschaft von Putty
 						input = input.replace("���� ����'������", "");
 						if (!input.contains(":")) {
 							sendPacket(PacketType.disconnect, "invalid_command");
@@ -40,8 +53,8 @@ public abstract class Connection {
 							socket.close();
 							break;
 						}
-						if (getConnectionState() == ConnectionState.Login
-								&& !(type == PacketType.connect || type == PacketType.disconnect || type == PacketType.refused)) {
+						if (getConnectionState() == ConnectionState.Login && !(type == PacketType.connect
+								|| type == PacketType.disconnect || type == PacketType.refused)) {
 							socket.close();
 							break;
 						}
@@ -60,7 +73,7 @@ public abstract class Connection {
 		clientThread.start();
 
 	}
-	
+
 	public abstract void onDisconnect();
 
 	public abstract ConnectionState getConnectionState();

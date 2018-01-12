@@ -19,9 +19,11 @@ public class ClientConnection extends Connection {
 	private ConnectionState state = ConnectionState.Login;
 
 	/**
-	 * Erzeugt eine neue Verbidnung 
-	 * @param socket Socket - Der Verbindungssocket
-	 * @param manager 
+	 * Erzeugt eine neue Verbidnung
+	 * 
+	 * @param socket
+	 *            Socket - Der Verbindungssocket
+	 * @param manager
 	 */
 	public ClientConnection(Socket socket, PacketManager manager) {
 		super(socket, manager);

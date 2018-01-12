@@ -91,5 +91,4 @@ public class TeilnehmerListe {
 			broadcastUserList();
 		}
 	}
-
 }
